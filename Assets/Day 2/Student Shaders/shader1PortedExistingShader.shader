@@ -1,9 +1,7 @@
-Shader "Custom/JasonShadedShaderDay1"
+﻿Shader "Custom/shader1PortedExistingShader"
 {
     Properties
     {
-        // You can still comment in these
-        // these must be one line declarations
         // [Attribute] _PropertyName("Display Name", Type) = DefaultValue
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white"
@@ -20,7 +18,6 @@ Shader "Custom/JasonShadedShaderDay1"
             "LightMode" = "UniversalForward"
         }
 
- 
         // Run once per object
         Pass
         {
@@ -30,7 +27,6 @@ Shader "Custom/JasonShadedShaderDay1"
             // Preprocessor directives to define the vertex and fragment functions
             #pragma vertex vert 
             #pragma fragment frag
-            #pragma shader_feature _FORWARD_PLUS
 
             // Multi compile directives to enbable lighting and shadow functions within URP
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
@@ -49,13 +45,14 @@ Shader "Custom/JasonShadedShaderDay1"
             float4 _BaseMap_ST;
             float4 _Target;
             float _Intensity;
+
             
             // This comes from outside of the shader
             // The allcaps term after the : is called a SEMANTIC, which tells the GPU what variables to put into the shader
             struct Attributes
             {
                 // Position object space positionOS
-                float4 positionOS : POSITION; // these semantics come from convention, and are passed from the object data
+                float4 positionOS : POSITION;
                 float3 normalOS : NORMAL;
                 float2 uv : TEXCOORD0;
             };
@@ -70,22 +67,11 @@ Shader "Custom/JasonShadedShaderDay1"
                 float3 worldNormal : TEXCOORD2;
             };
 
-            // displacement function (matches original logic)
-            float3 CalcOffset(float3 p)
-            {
-                float3 direction = float3(0,0,0) - p;
-                float3 normalizeDirection = normalize(direction);
-                float3 offsetIntensity = normalizeDirection * 0.2 * sin(10.0 * abs(p.y));
-                return offsetIntensity * _SinTime.z;
-            }
-
-            
             // You might see something called appdata (now Attributes) in built in shaders
             Varyings vert(Attributes IN)
             {
                 Varyings OUT;
-                float3 position = IN.positionOS.xyz;
-                OUT.positionHCS = TransformObjectToHClip(position); //transform the vertex's object space position to homogeneous clip space (screen)
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz); //transform the vertex's object space position to homogeneous clip space (screen)
                 OUT.worldPos = TransformObjectToWorld(IN.positionOS.xyz); // transform the vertex's object space position to world space
                 OUT.worldNormal = TransformObjectToWorldNormal(IN.normalOS); // transform the vertex's object space normal to world space
 
@@ -96,11 +82,6 @@ Shader "Custom/JasonShadedShaderDay1"
             // You might see something called v2f (now varyings) in built in shaders
             half4 frag(Varyings IN) : SV_Target //note that this *function* has a SV_Target semantic, meaning it is the final output color of the pixel
             {
-                // Example HLSL shading example
-                // Calculate distance from world position to target position
-                float distance = 1.-length(IN.worldPos - _Target.xyz);
-                half4 col = _BaseColor * (distance+ _Intensity); // modulate base color by distance and intensity
-                // this above code is not used in the final color at the moment.
 
                 //This is basic Lambertian diffuse shading https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/diffuse-lambertian-shading.html
                 float3 LightDirection = GetMainLight().direction;
@@ -109,9 +90,36 @@ Shader "Custom/JasonShadedShaderDay1"
                 float mlShadowAttenuation = MainLightRealtimeShadow(TransformWorldToShadowCoord(IN.worldPos)); // get the shadow attenuation from the Unity function using a shadow map
                 float3 litColor = GetMainLight().color.rgb * NdotL * mlShadowAttenuation; // multiplies the light according to Lambertian diffuse model
 
-                // Output the final color
-                // You will notice some artifacts on a circle with default lighting settings. These are "shadow acne" that require fixing in bias settings
-                return half4(litColor.rgb,1);
+
+                IN.uv -= 0.5;
+
+                float3 colorr = float3(0.05, 0.05, 0.08); //background color
+    
+                //moving clover shapes from week2
+                for (int i = 0; i < 10; i++) {
+        
+                    float2 p = float2(sin(i*1.4 + (_Time.y*0.1))*0.6, sin(i*4.3 - (_Time.y*0.1) + 3.)*0.6);
+
+                    float2 diff = IN.uv - p;
+
+                    float r = length(diff);
+       
+                    float theta = atan2(diff.y, diff.x);
+        
+                    float petalEquation = abs(0.3 * cos(2.0 * theta)); 
+
+                    float blur = 0.2;
+        
+                    float blossom = 1.0 - smoothstep(petalEquation, petalEquation + blur, r);
+
+                    float3 bCol = float3(0.9, 0.9, 1.0);
+
+                    colorr += bCol * blossom * 0.6;
+                }
+
+                float3 finalCol = colorr * litColor;
+
+                return half4(finalCol.rgb,1);
             }
             ENDHLSL
         }
@@ -131,9 +139,7 @@ Shader "Custom/JasonShadedShaderDay1"
             #pragma vertex ShadowPassVertex
             #pragma fragment ShadowPassFragment
             #include "Packages/com.unity.render-pipelines.universal/Shaders/ShadowCasterPass.hlsl"
-            
-ENDHLSL
+            ENDHLSL
         }
     }
 }
- 

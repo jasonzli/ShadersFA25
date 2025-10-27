@@ -22,7 +22,6 @@ float noise21(float2 uv){
     return lerp(bresult,tresult,unitUV.y);
 }
 
-
 float fBM(float2 uv){
     float result = 0.;
     for(int i = 0; i <  8; i++){

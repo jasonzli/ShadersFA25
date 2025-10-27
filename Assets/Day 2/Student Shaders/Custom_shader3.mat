@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Custom_UnlitColorShader
-  m_Shader: {fileID: 4800000, guid: 3fade904819a84e91b8b181ad0e452a4, type: 3}
+  m_Name: Custom_shader3
+  m_Shader: {fileID: 4800000, guid: 35570eff2fd9f43f8ad4783d707d8c36, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,9 +29,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CutoutSize: 1.1
+    - _Intensity: 1
+    - _Scale: 19.21
     m_Colors:
-    - _BaseColor: {r: 0.35219702, g: 0.5377358, b: 0.13950695, a: 1}
-    - _CutoutLocation: {r: -0.76, g: -0.51, b: -0.15, a: 1}
+    - _BaseColor: {r: 0.4528302, g: 0.13456745, b: 0.13456745, a: 1}
+    - _Target: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
