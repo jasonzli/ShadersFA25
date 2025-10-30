@@ -158,11 +158,7 @@ Shader "Custom/VertexAnimationLitNormals"
                 OUT.worldPos = TransformObjectToWorld(IN.positionOS.xyz);
                 OUT.worldNormal = TransformObjectToWorldNormal(IN.normalOS);
                 OUT.uv = IN.uv; // using the UV coordinate now...
-
                 
-                float distance = abs(.5-IN.uv.x); // .5 and .5 at the edges
-                distance *= 2; // now [1,1] at edges and 0 in middle
-
                 // Move the vertex up and down based on distance from the center and time
                 IN.positionOS.xyz = ApplyWingFlap(IN.positionOS.xyz, IN.uv);
                 OUT.positionHCS = GetShadowPositionHClip(IN);
