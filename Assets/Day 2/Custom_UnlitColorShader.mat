@@ -29,9 +29,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CutoutSize: 1.1
+    - _CutoutSize: 1
     m_Colors:
     - _BaseColor: {r: 0.35219702, g: 0.5377358, b: 0.13950695, a: 1}
-    - _CutoutLocation: {r: -0.76, g: -0.51, b: -0.15, a: 1}
+    - _CutoutLocation: {r: 1.22, g: -0.646, b: -0.49, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
