@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Custom_VertexAnimation
-  m_Shader: {fileID: 4800000, guid: 974458d6645564277aaa9c2d4be8bd1d, type: 3}
+  m_Name: InClassShader
+  m_Shader: {fileID: 4800000, guid: 4564da64bdd914caaa01d3f9adc4b7b6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -19,15 +19,13 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: _BaseColor
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats:
-    - _FlapSpeed: 4.3
-    - _WingHeight: -0.32
+    m_Floats: []
     m_Colors:
-    - _BaseColor: {r: 0.5283019, g: 0.022427902, b: 0.022427902, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

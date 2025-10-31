@@ -1,4 +1,4 @@
-Shader "Custom/VertexAnimationLit"
+Shader "Custom/ShaderVertexInClass"
 {
     Properties
     {
@@ -50,55 +50,49 @@ Shader "Custom/VertexAnimationLit"
                 float3 worldNormal : TEXCOORD2; // also maybe...?
             };
 
-            float3 ApplyWingFlap(float3 positionOS, float2 uv)
+            float3 ApplyWingFlap(float3 positionOS, float t)
             {
-                float distance = abs(.5-uv.x); // .5 and .5 at the edges
-                distance *= 2; // now [1,1] at edges and 0 in middle
-
-                // Move the vertex up and down based on distance from the center and time
-                float heightOffset = sin(_Time.y * _FlapSpeed) * _WingHeight * distance; // distance will be 0 at center!
-                return float3(positionOS.x, positionOS.y + heightOffset, positionOS.z);
-                
+                float vertexDistance = abs(positionOS.x);
+                float3 modifiedPositionOS = positionOS.xyz + float3(0,sin(t*_FlapSpeed) * _WingHeight,0) * vertexDistance;
+                return modifiedPositionOS;
             }
+            
             Varyings vertex(Attributes IN)
             {
                 Varyings OUT = (Varyings)0;
-
-                //OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                IN.positionOS.xyz = ApplyWingFlap(IN.positionOS.xyz, _Time.y);
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.worldPos = TransformObjectToWorld(IN.positionOS.xyz);
                 OUT.worldNormal = TransformObjectToWorldNormal(IN.normalOS);
-                OUT.uv = IN.uv; // using the UV coordinate now...
-                
-                // Move the vertex up and down based on distance from the center and time
-                IN.positionOS.xyz = ApplyWingFlap(IN.positionOS.xyz, IN.uv);
-                OUT.positionHCS = TransformObjectToHClip(IN.positionOS);
-                
+                OUT.uv = IN.uv;
                 return OUT;
             }
 
             half4 fragment(Varyings IN) : SV_Target
             {
-                InputData lightingData = (InputData)0;
-                lightingData.positionWS = IN.worldPos;
-                lightingData.normalWS = normalize(IN.worldNormal);
-                lightingData.viewDirectionWS = GetWorldSpaceViewDir(lightingData.positionWS);
-                lightingData.shadowCoord = TransformWorldToShadowCoord(lightingData.positionWS);
-
+                InputData lightData = (InputData)0;
+                lightData.positionWS = IN.worldPos;
+                lightData.normalWS = normalize(cross(ddy(lightData.positionWS), ddx(lightData.positionWS)));
+                lightData.viewDirectionWS = GetWorldSpaceViewDir(lightData.positionWS);
+                lightData.shadowCoord = TransformWorldToShadowCoord(lightData.positionWS);
+                
                 SurfaceData surfaceData = (SurfaceData)0;
-                surfaceData.albedo = _BaseColor;
+                surfaceData.albedo = _BaseColor.rgb;
                 surfaceData.alpha = 1.0;
                 surfaceData.smoothness = .5;
                 surfaceData.specular = .5;
 
-                return UniversalFragmentBlinnPhong(lightingData, surfaceData);
-            }
+                return UniversalFragmentBlinnPhong(lightData, surfaceData);
 
-            
+            }
             ENDHLSL
         }
         Pass
         {
-            Tags { "LightMode" = "ShadowCaster" }
+            Tags
+            {
+                "LightMode" = "ShadowCaster"
+            }
             HLSLPROGRAM
 
             #pragma vertex vertex
@@ -111,7 +105,7 @@ Shader "Custom/VertexAnimationLit"
             float _WingHeight;
             float _FlapSpeed;
 
-            float3 _LightDirection0;
+            float3 _LightDirection0; // filled by unity and this is barely documented anywhere
             float3 _LightPosition;
             
             struct Attributes
@@ -129,6 +123,13 @@ Shader "Custom/VertexAnimationLit"
                 float3 worldNormal : TEXCOORD2; // also maybe...?
             };
 
+            float3 ApplyWingFlap(float3 positionOS, float t)
+            {
+                float vertexDistance = abs(positionOS.x);
+                float3 modifiedPositionOS = positionOS.xyz + float3(0,sin(t*_FlapSpeed) * _WingHeight,0) * vertexDistance;
+                return modifiedPositionOS;
+            }
+
             float4 GetShadowPositionHClip(Attributes Input)
             {
                 float3 positionWS = TransformObjectToWorld(Input.positionOS.xyz);
@@ -136,45 +137,24 @@ Shader "Custom/VertexAnimationLit"
                 positionCS = ApplyShadowClamping(positionCS);
                 return positionCS;
             }
-
-            float3 ApplyWingFlap(float3 positionOS, float2 uv)
-            {
-                float distance = abs(.5-uv.x); // .5 and .5 at the edges
-                distance *= 2; // now [1,1] at edges and 0 in middle
-                // Move the vertex up and down based on distance from the center and time
-                float heightOffset = sin(_Time.y * _FlapSpeed) * _WingHeight * distance; // distance will be 0 at center!
-                return float3(positionOS.x, positionOS.y + heightOffset, positionOS.z);
-            }
             
             Varyings vertex(Attributes IN)
             {
                 Varyings OUT = (Varyings)0;
-
-                //OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                IN.positionOS.xyz = ApplyWingFlap(IN.positionOS.xyz, _Time.y);
+                OUT.positionHCS = GetShadowPositionHClip(IN);
                 OUT.worldPos = TransformObjectToWorld(IN.positionOS.xyz);
                 OUT.worldNormal = TransformObjectToWorldNormal(IN.normalOS);
-                OUT.uv = IN.uv; // using the UV coordinate now...
-
-                
-                float distance = abs(.5-IN.uv.x); // .5 and .5 at the edges
-                distance *= 2; // now [1,1] at edges and 0 in middle
-
-                // Move the vertex up and down based on distance from the center and time
-                IN.positionOS.xyz = ApplyWingFlap(IN.positionOS.xyz, IN.uv);
-                OUT.positionHCS = GetShadowPositionHClip(IN);
-                
+                OUT.uv = IN.uv;
                 return OUT;
             }
-
 
             half4 fragment(Varyings IN) : SV_Target
             {
                 return 0;
-            }
 
-            
+            }
             ENDHLSL
         }
-    
     }
 }
