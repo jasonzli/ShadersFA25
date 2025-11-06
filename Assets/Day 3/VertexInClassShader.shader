@@ -152,7 +152,6 @@ Shader "Custom/ShaderVertexInClass"
             half4 fragment(Varyings IN) : SV_Target
             {
                 return 0;
-
             }
             ENDHLSL
         }
