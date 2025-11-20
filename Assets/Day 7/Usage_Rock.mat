@@ -56,9 +56,11 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Rock_ness: 1
-    - _View_Offset: 0.15
+    - _View_Offset: 0.005
     m_Colors:
     - _Inner_Stone_Color: {r: 1, g: 0.9103774, b: 0.9218186, a: 1}
     - _Primary_Stone_Color: {r: 1, g: 0.22169808, b: 0.6991953, a: 1}
+    - _Streak_values: {r: 28, g: 20, b: 2, a: 0}
+    - _Striation_Values: {r: 2, g: 78.87, b: 2, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
