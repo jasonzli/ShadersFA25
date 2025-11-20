@@ -1,0 +1,11 @@
+Model Information:
+* title:	Magma | Tile Texture
+* source:	https://sketchfab.com/3d-models/magma-tile-texture-52e18b2dff25493bb1d2f22f45a3c04f
+* author:	CATholic (https://sketchfab.com/CATholic)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Magma | Tile Texture" (https://sketchfab.com/3d-models/magma-tile-texture-52e18b2dff25493bb1d2f22f45a3c04f) by CATholic (https://sketchfab.com/CATholic) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
