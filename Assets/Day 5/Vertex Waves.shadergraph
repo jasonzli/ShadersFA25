@@ -1431,10 +1431,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 703.0,
-            "y": 68.0,
-            "width": 208.0,
-            "height": 302.0
+            "x": 736.0000610351563,
+            "y": 123.99999237060547,
+            "width": 207.99993896484376,
+            "height": 301.9999694824219
         }
     },
     "m_Slots": [
@@ -3208,8 +3208,8 @@
     "m_ObjectId": "c1a382b1f94d42dbacfa86c407fbe16d",
     "m_Title": "Just Sampling the Noise Field",
     "m_Position": {
-        "x": -656.232666015625,
-        "y": -429.4161071777344
+        "x": -656.0000610351563,
+        "y": -429.00006103515627
     }
 }
 
@@ -3360,10 +3360,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1010.5,
-            "y": 152.5,
+            "x": 1037.0,
+            "y": 154.49996948242188,
             "width": 127.5,
-            "height": 125.0
+            "height": 125.00009155273438
         }
     },
     "m_Slots": [
