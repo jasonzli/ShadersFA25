@@ -173,6 +173,9 @@
         },
         {
             "m_Id": "e5df9ac5eebf4f45b233e41396012658"
+        },
+        {
+            "m_Id": "0c7dfd20f495423bbd7a598bcc132a2b"
         }
     ],
     "m_GroupDatas": [
@@ -1286,7 +1289,7 @@
     "m_Title": "Rotating with Advanced Vertex Data",
     "m_Position": {
         "x": -1699.5001220703125,
-        "y": -1436.0001220703125
+        "y": -1436.0
     }
 }
 
@@ -1475,6 +1478,50 @@
     ],
     "synonyms": [
         "separate"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.SubtractNode",
+    "m_ObjectId": "0c7dfd20f495423bbd7a598bcc132a2b",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Subtract",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -2307.253662109375,
+            "y": -1573.1275634765625,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "3953622931b04c0ca69aa69d5a08f661"
+        },
+        {
+            "m_Id": "dc560824b7054c68bb7fb16b8405618b"
+        },
+        {
+            "m_Id": "995bea589779455990f408416dbc42b9"
+        }
+    ],
+    "synonyms": [
+        "subtraction",
+        "remove",
+        "minus",
+        "take away"
     ],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
@@ -1839,10 +1886,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1629.5,
-            "y": 796.4999389648438,
-            "width": 137.5,
-            "height": 34.0001220703125
+            "x": -2593.5,
+            "y": 565.5001220703125,
+            "width": 125.499755859375,
+            "height": 76.99993896484375
         }
     },
     "m_Slots": [
@@ -2196,10 +2243,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1887.0001220703125,
-            "y": 1040.5,
-            "width": 123.5001220703125,
-            "height": 173.0
+            "x": -2851.000244140625,
+            "y": 809.5000610351563,
+            "width": 123.5,
+            "height": 172.99993896484376
         }
     },
     "m_Slots": [
@@ -2376,6 +2423,30 @@
         "e31": 0.0,
         "e32": 0.0,
         "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "3953622931b04c0ca69aa69d5a08f661",
+    "m_Id": 0,
+    "m_DisplayName": "A",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "A",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
+        "w": 1.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
     }
 }
 
@@ -2715,7 +2786,7 @@
     "m_Title": "Use the New UV Channel",
     "m_Position": {
         "x": -2254.0,
-        "y": -1329.0001220703125
+        "y": -1329.0
     }
 }
 
@@ -3270,8 +3341,8 @@
     "m_ObjectId": "66d2d54766004d299db6980a02731bda",
     "m_Title": "Normals Adjustment",
     "m_Position": {
-        "x": -354.000244140625,
-        "y": 282.999755859375
+        "x": -354.0,
+        "y": 282.9998779296875
     }
 }
 
@@ -3281,7 +3352,7 @@
     "m_ObjectId": "68db9b6887b5457d91e6d4c1f683f481",
     "m_Title": "A stub for more position modification",
     "m_Position": {
-        "x": -3412.999755859375,
+        "x": -3413.0,
         "y": -500.5
     }
 }
@@ -3616,10 +3687,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1404.5001220703125,
-            "y": 830.5000610351563,
+            "x": -2368.5,
+            "y": 599.5000610351563,
             "width": 126.0,
-            "height": 118.0
+            "height": 118.00006103515625
         }
     },
     "m_Slots": [
@@ -3659,10 +3730,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1709.5,
-            "y": 889.5000610351563,
-            "width": 208.0,
-            "height": 301.99993896484377
+            "x": -2673.5,
+            "y": 658.5,
+            "width": 207.999755859375,
+            "height": 302.0001220703125
         }
     },
     "m_Slots": [
@@ -3813,10 +3884,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2149.0,
-            "y": 896.5,
-            "width": 207.9998779296875,
-            "height": 278.0001220703125
+            "x": -3113.000244140625,
+            "y": 665.5001220703125,
+            "width": 208.000244140625,
+            "height": 278.0
         }
     },
     "m_Slots": [
@@ -4132,6 +4203,30 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "995bea589779455990f408416dbc42b9",
+    "m_Id": 2,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "9979dc5b317241a6b22aa11845554d2a",
     "m_Id": 0,
@@ -4430,10 +4525,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1843.0,
-            "y": 864.4999389648438,
-            "width": 129.5,
-            "height": 94.0
+            "x": -2807.0,
+            "y": 633.5000610351563,
+            "width": 129.499755859375,
+            "height": 94.0001220703125
         }
     },
     "m_Slots": [
@@ -4462,8 +4557,8 @@
     "m_ObjectId": "a0b00fcade824e6dbc548207a5339792",
     "m_Title": "Vertex Color as Seed",
     "m_Position": {
-        "x": -2174.0,
-        "y": 649.999755859375
+        "x": -3138.0,
+        "y": 418.9998779296875
     }
 }
 
@@ -4810,8 +4905,8 @@
     "m_Theme": 0,
     "m_Position": {
         "serializedVersion": "2",
-        "x": -2144.0,
-        "y": 709.0,
+        "x": -3108.0,
+        "y": 478.0,
         "width": 200.0,
         "height": 160.0
     },
@@ -5789,6 +5884,30 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "dc560824b7054c68bb7fb16b8405618b",
+    "m_Id": 1,
+    "m_DisplayName": "B",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "B",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
+        "w": 1.0
     },
     "m_DefaultValue": {
         "x": 0.0,
