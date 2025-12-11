@@ -63,7 +63,7 @@ Shader "Custom/Raymarch"
                 float minDist = 1e10;
                 for (int i = 0; i < MAX_POINTS; i++)
                 {
-                    float dist = sphereSDF(p, _points[i], 0.2);
+                    float dist = sphereSDF(p, _points[i], 0.5);
                     minDist = opSmoothUnion(minDist, dist,.4);
                 }
                 return minDist;
@@ -178,7 +178,7 @@ Shader "Custom/Raymarch"
             {
                 float2 uv = IN.uv * 2.0 - 1.0;
                 float fov = 60.0;
-                float3 cameraPosition = float3(0,0,-5); // moving the camera in a circle
+                float3 cameraPosition = float3(0,3,-7); // moving the camera in a circle
                 float3 rayDirection = normalize(float3(uv * tan(radians(fov)), 1.0)); // there are multiple versions of this ray direction calculation
                 float3 color = raymarch(cameraPosition,rayDirection);
                 
