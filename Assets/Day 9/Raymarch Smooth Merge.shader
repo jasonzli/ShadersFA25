@@ -1,4 +1,4 @@
-Shader "Custom/Raymarch"
+Shader "Custom/Raymarch Smooth Merge"
 {
     Properties
     {
@@ -38,12 +38,7 @@ Shader "Custom/Raymarch"
                 OUT.uv = IN.uv;
                 return OUT;
             }
-            // Specialized creation of a vector array of points
-            static const int MAX_POINTS = 32;
-            float3 _points[MAX_POINTS]; // for this to be declared via max points you must have a static
-            // you can also just set it manually
 
-            
             // Smooth Union operation for SDFs https://iquilezles.org/articles/distfunctions/
             float opSmoothUnion( float d1, float d2, float k )
             {
@@ -57,17 +52,6 @@ Shader "Custom/Raymarch"
                 return length(p - center) - radius;
             }
 
-            // Reads an array of points and computes them
-            float mapPoints(float3 p)
-            {
-                float minDist = 1e10;
-                for (int i = 0; i < MAX_POINTS; i++)
-                {
-                    float dist = sphereSDF(p, _points[i], 0.2);
-                    minDist = opSmoothUnion(minDist, dist,.4);
-                }
-                return minDist;
-            }
             
             float map(float3 p) // note how this is a float3 field
             {
@@ -116,7 +100,7 @@ Shader "Custom/Raymarch"
                     }
                     
                     float3 currentPosition = shadowRayOrigin + travel * directionToLight;
-                    float distanceToSurface = mapPoints(currentPosition);
+                    float distanceToSurface = map(currentPosition);
 
                     // this is a shadow accumulation formula
                     shadow = min(shadow, softnessFactor * distanceToSurface / max(0.001, travel));
@@ -137,7 +121,7 @@ Shader "Custom/Raymarch"
                     float3 marchPosition = rayOrigin + rayTravel * rayDirection; // how far we are
 
                     // eval the distance field
-                    float distanceToSurface = mapPoints(marchPosition);
+                    float distanceToSurface = map(marchPosition);
 
                     // hit something
                     if (distanceToSurface < MINIMUM_HIT_DISTANCE)
