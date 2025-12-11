@@ -51,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Assembled: 0.214
+    - _Assembled: 1
     - _Break_Delay_: 0
     - _Break_Time: 0
     - _Distance: 4

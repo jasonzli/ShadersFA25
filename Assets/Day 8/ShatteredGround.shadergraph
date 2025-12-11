@@ -683,8 +683,8 @@
     "m_ObjectId": "060a7868cccd4de38d32e5179b6920bf",
     "m_Title": "Rotating with Advanced Vertex Data",
     "m_Position": {
-        "x": -1728.0001220703125,
-        "y": -1440.0
+        "x": -1728.4998779296875,
+        "y": -1440.4998779296875
     }
 }
 
@@ -1264,8 +1264,8 @@
     "m_ObjectId": "48b40820942e42bf9c636811a2f90365",
     "m_Title": "Use the New UV Channel",
     "m_Position": {
-        "x": -2106.000244140625,
-        "y": -1114.0
+        "x": -2106.0,
+        "y": -1113.9998779296875
     }
 }
 
@@ -1531,7 +1531,7 @@
     "m_ObjectId": "66d2d54766004d299db6980a02731bda",
     "m_Title": "Normals Adjustment",
     "m_Position": {
-        "x": -632.0000610351563,
+        "x": -631.9998779296875,
         "y": -297.0
     }
 }
@@ -1542,8 +1542,8 @@
     "m_ObjectId": "68db9b6887b5457d91e6d4c1f683f481",
     "m_Title": "A stub for more position modification",
     "m_Position": {
-        "x": -1059.0001220703125,
-        "y": -591.9998779296875
+        "x": -1058.4998779296875,
+        "y": -591.5
     }
 }
 
@@ -1899,10 +1899,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1872.9998779296875,
-            "y": -120.99999237060547,
+            "x": -1988.0,
+            "y": -124.00000762939453,
             "width": 208.0,
-            "height": 278.0000305175781
+            "height": 278.00006103515627
         }
     },
     "m_Slots": [
@@ -2168,8 +2168,8 @@
     "m_ObjectId": "a0b00fcade824e6dbc548207a5339792",
     "m_Title": "Vertex Color as Seed",
     "m_Position": {
-        "x": -1897.9998779296875,
-        "y": -366.9999084472656
+        "x": -2012.4998779296875,
+        "y": -369.99993896484377
     }
 }
 
@@ -2267,8 +2267,8 @@
     "m_Theme": 0,
     "m_Position": {
         "serializedVersion": "2",
-        "x": -1870.0,
-        "y": -308.5,
+        "x": -1985.0,
+        "y": -311.0,
         "width": 200.0,
         "height": 160.0
     },
