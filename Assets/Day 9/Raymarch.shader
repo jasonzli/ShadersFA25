@@ -43,19 +43,28 @@ Shader "Custom/Raymarch"
             {
                 return length(p - center) - radius;
             }
-
+            
+            float3 repeat(float3 p, float3 c)
+            {
+                return fmod(p + 0.5 * c, c) - 0.5 * c;
+            }
             
             float map(float3 p) // note how this is a float3 field
             {
-                float sphere_0 = sphereSDF( p , float3(0,1.,0.), 1.25 );
-                float sphere_1 = sphereSDF( p , float3(2.,0.,0.), 1.0 );
-                float sphere_2 = sphereSDF( p , float3(-2.,0.,0.), 1.0 );
+                float3 rp = repeat(p, float3(4.,4.,4.)); // repeat every 4 units
+                float sphere_0 = sphereSDF( rp , float3(0,1.,0.), 1.25 );
+                float sphere_1 = sphereSDF( rp , float3(2.,0.,0.), 1.0 );
+                float sphere_2 = sphereSDF( rp , float3(-2.,0.,0.), 1.0 );
 
                 float minSphere = min(sphere_1, sphere_2);
                 minSphere = min(minSphere, sphere_0);
-                
-                return minSphere;
+
+                float plane_0 = p.y + 1.5; // y = -1.5 plane
+                float planeDist = plane_0;
+
+                return min(minSphere, planeDist);
             }
+
             
             float3 calculateNormal(float3 p)
             {
@@ -76,9 +85,9 @@ Shader "Custom/Raymarch"
             float softShadow(float3 shadowRayOrigin, float3 directionToLight, float maxDistance)
             {
                 float shadow = 1.0;
-                float travel = .0001;
+                float travel = .01;
                 float softnessFactor = 8.0; // softness
-                const int MAX_SHADOW_STEPS = 64;
+                const int MAX_SHADOW_STEPS = 128;
 
                 for (int i = 0; i < MAX_SHADOW_STEPS; i++)
                 {
@@ -90,10 +99,7 @@ Shader "Custom/Raymarch"
                     
                     float3 currentPosition = shadowRayOrigin + travel * directionToLight;
                     float distanceToSurface = map(currentPosition);
-                    if (distanceToSurface < 0.0001) //this needs to be smaller than the minimum hit distance
-                    {
-                        return 0.0; // in shadow
-                    }
+
                     // this is a shadow accumulation formula
                     shadow = min(shadow, softnessFactor * distanceToSurface / max(0.001, travel));
                     travel += distanceToSurface;
@@ -105,9 +111,10 @@ Shader "Custom/Raymarch"
             float3 raymarch(float3 rayOrigin, float3 rayDirection)
             {
                 float rayTravel = 0.0;
-                const int NUMBER_OF_STEPS = 128;
-                const float MINIMUM_HIT_DISTANCE = .0001;
+                const int NUMBER_OF_STEPS = 512; // lower this to see sample artifacts
+                const float MINIMUM_HIT_DISTANCE = .001;
                 const float MAXIMUM_MARCH_DISTANCE = 1000.0;
+                float3 lightPosition = float3(5. * sin(_Time.z),5.,-5); // lighting position, we define
                 for (int i = 0; i < NUMBER_OF_STEPS; i++)
                 {
                     float3 marchPosition = rayOrigin + rayTravel * rayDirection; // how far we are
@@ -115,18 +122,21 @@ Shader "Custom/Raymarch"
                     // eval the distance field
                     float distanceToSurface = map(marchPosition);
 
+                    // hit something
                     if (distanceToSurface < MINIMUM_HIT_DISTANCE)
                     {
-                        // hit something
-                        float3 normalAtHit = calculateNormal(marchPosition);
+                        float3 normalAtHit = calculateNormal(marchPosition); // calculate the normal for lighting
                         // simple shading based on normal
-                        float3 lightPosition = float3(5. * sin(_Time.z),5.,-5);
                         float3 lightDirection = normalize(lightPosition - marchPosition);
                         float lightDistance = length(lightPosition - marchPosition);
-                        float3 shadowRayOrigin = marchPosition + normalAtHit * MINIMUM_HIT_DISTANCE * 2.0;
-                        float shadow = softShadow(shadowRayOrigin, lightDirection, lightDistance*2.0);
+
+                        // begin to calculate a shadow based on origin point
+                        float3 shadowRayOrigin = marchPosition + normalAtHit * MINIMUM_HIT_DISTANCE * 2.0; // moved forward so it doesn't automatically count
+                        float shadow = softShadow(shadowRayOrigin, lightDirection, lightDistance); // x2 for safety but unnecessary
+
+                        // Straightforward Normal dot light direction for diffuse color
                         float diffuse = max(dot(normalAtHit, lightDirection), 0.0);
-                        float3 baseColor = float3(1.,0.,0.);
+                        float3 baseColor = float3(1.,0.,0.); // starting base color
                         float3 color = baseColor * diffuse * shadow + baseColor * 0.1; // lit color + ambient
                         return color;
                     }
@@ -139,7 +149,12 @@ Shader "Custom/Raymarch"
 
                     rayTravel += distanceToSurface;
                 }
-                return float3(0.,0.,0.);
+
+                // Can return a background color... or black
+                // simple gradient background
+                float backgroundT = rayDirection.y /5.;
+                float3 backgroundColor = lerp(float3(0.6, 0.8, 1.0), float3(1.0, 1.0, 1.0), backgroundT);
+                return backgroundColor;;
             }
             
             half4 frag(Varyings IN) : SV_Target
