@@ -46,12 +46,15 @@ Shader "Custom/Raymarch"
             
             float3 repeat(float3 p, float3 c)
             {
-                return fmod(p + 0.5 * c, c) - 0.5 * c;
+                float3 cell = floor(p / c + .5);
+                return p - c * cell;
             }
             
             float map(float3 p) // note how this is a float3 field
             {
-                float3 rp = repeat(p, float3(4.,4.,4.)); // repeat every 4 units
+                float3 rp = repeat(p, float3(10,8.,20.)); // repeat every 4 units
+
+                return sphereSDF(rp, float3(0,0,0), 1.0);
                 float sphere_0 = sphereSDF( rp , float3(0,1.,0.), 1.25 );
                 float sphere_1 = sphereSDF( rp , float3(2.,0.,0.), 1.0 );
                 float sphere_2 = sphereSDF( rp , float3(-2.,0.,0.), 1.0 );
@@ -161,7 +164,7 @@ Shader "Custom/Raymarch"
             {
                 float2 uv = IN.uv * 2.0 - 1.0;
                 float fov = 60.0;
-                float3 cameraPosition = float3(0,0,-5);
+                float3 cameraPosition = float3(3 * sin(_Time.z),-1.2,-5*cos(_Time.z)); // moving the camera in a circle
                 float3 rayDirection = normalize(float3(uv * tan(radians(fov)), 1.0)); // there are multiple versions of this ray direction calculation
                 float3 color = raymarch(cameraPosition,rayDirection);
                 
