@@ -83,7 +83,6 @@ Shader "Custom/Raymarch"
 
                 return min(minSphere, planeDist);
             }
-
             
             float3 calculateNormal(float3 p)
             {
@@ -100,6 +99,7 @@ Shader "Custom/Raymarch"
                 }
                 return normalize(normal);
             }
+            
             float softShadow(float3 shadowRayOrigin, float3 directionToLight, float maxDistance)
             {
                 float shadow = 1.0;
@@ -125,6 +125,7 @@ Shader "Custom/Raymarch"
                 }
                 return saturate(shadow);
             }
+            
             float3 raymarch(float3 rayOrigin, float3 rayDirection)
             {
                 float rayTravel = 0.0;

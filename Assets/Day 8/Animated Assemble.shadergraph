@@ -1285,7 +1285,7 @@
     "m_Title": "Rotating with Advanced Vertex Data",
     "m_Position": {
         "x": -1780.0,
-        "y": -1681.4998779296875
+        "y": -1682.0
     }
 }
 
@@ -1912,10 +1912,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1499.999755859375,
-            "y": 246.5000762939453,
+            "x": -1263.9998779296875,
+            "y": 93.99995422363281,
             "width": 126.0,
-            "height": 117.99989318847656
+            "height": 117.99996948242188
         }
     },
     "m_Slots": [
@@ -2742,8 +2742,8 @@
     "m_ObjectId": "48b40820942e42bf9c636811a2f90365",
     "m_Title": "Use the New UV Channel",
     "m_Position": {
-        "x": -2093.3916015625,
-        "y": -1337.4298095703125
+        "x": -2093.0,
+        "y": -1337.0
     }
 }
 
@@ -3441,8 +3441,8 @@
     "m_ObjectId": "66d2d54766004d299db6980a02731bda",
     "m_Title": "Normals Adjustment",
     "m_Position": {
-        "x": -519.000244140625,
-        "y": 39.500099182128909
+        "x": -519.0,
+        "y": 40.0
     }
 }
 
@@ -4587,8 +4587,8 @@
     "m_ObjectId": "a0b00fcade824e6dbc548207a5339792",
     "m_Title": "Vertex Color as Seed",
     "m_Position": {
-        "x": -3309.5,
-        "y": 170.50010681152345
+        "x": -3309.0,
+        "y": 171.0
     }
 }
 
