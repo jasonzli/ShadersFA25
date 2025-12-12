@@ -88,9 +88,9 @@ Shader "Custom/Raymarch"
             float3 calculateNormal(float3 p)
             {
                 const float3 epsilon = float3(.0001,0.,0.);
-                float xGradient = map(p + epsilon.xyy) - map(p - epsilon.xyy);
-                float yGradient = map(p + epsilon.yxy) - map(p - epsilon.yxy);
-                float zGradient = map(p + epsilon.yyx) - map(p - epsilon.yyx);
+                float xGradient = mapPoints(p + epsilon.xyy) - mapPoints(p - epsilon.xyy);
+                float yGradient = mapPoints(p + epsilon.yxy) - mapPoints(p - epsilon.yxy);
+                float zGradient = mapPoints(p + epsilon.yyx) - mapPoints(p - epsilon.yyx);
 
                 float3 normal = normalize(float3(xGradient, yGradient, zGradient));
                 // check if normal has length of 0
